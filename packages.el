@@ -127,22 +127,13 @@
         lsp-ui-peek-always-show t
         lsp-ui-doc-enable nil))
 
-(use-package company-lsp
-  :ensure t
-  :defer t
-  :commands company-lsp
-  :config
-  (setq company-lsp-async t
-        company-lsp-enable-snippet t))
-
-
 ;; Magit ---------------------------------------------------------------------------------
 (use-package magit
   :ensure t
   :defer t
   :bind   ("C-x m" . magit-status)
-  :bind   (:map magit-file-mode-map
-                ("C-x g" . nil))
+  ;; :bind   (:map magit-file-mode-map
+  ;;               ("C-x g" . nil))
   :config (setq-default magit-diff-refine-hunk 'all)
           (setq magit-log-margin (quote (t
                                          "%Y-%m-%d %H:%M "
@@ -150,9 +141,9 @@
                                          t
                                          10)))
           (setq magit-git-global-arguments ; magit over tramp
-                (nconc magit-git-global-arguments
-                       '("-c" "color.ui=false"
-                         "-c" "color.diff=false"))))
+                (append magit-git-global-arguments
+                        '("-c" "color.ui=false"
+                          "-c" "color.diff=false"))))
 
 
 ;; Ediff
@@ -345,25 +336,20 @@
 
 
 ;; Haskell -------------------------------------------------------------------------------
-(use-package haskell-mode
-  :ensure t
-  :defer t
-  :hook (haskell-mode . turn-on-haskell-indent) ; Replace by structured-haskell-mode.
-  :config
-  (setq haskell-indent-offset 2
-        haskell-font-lock-symbols t)
+;; (use-package haskell-mode
+;;   :ensure t
+;;   :defer t
+;;   :hook (haskell-mode . turn-on-haskell-indent) ; Replace by structured-haskell-mode.
+;;   :config
+;;   (setq haskell-indent-offset 2
+;;         haskell-font-lock-symbols t)
 
-  (eval-after-load 'haskell-font-lock
-    '(progn
-       (defconst haskell-font-lock-symbols-alist
-                 '(("\\" . "λ") ("." "∘" haskell-font-lock-dot-is-not-composition)))
-       ;; (setq haskell-font-lock-keywords (haskell-font-lock-keywords-create nil))
-       )))
-
-(use-package intero
-  :ensure t
-  :defer t
-  :hook (haskell-mode . intero-mode))
+;;   (eval-after-load 'haskell-font-lock
+;;     '(progn
+;;        (defconst haskell-font-lock-symbols-alist
+;;                  '(("\\" . "λ") ("." "∘" haskell-font-lock-dot-is-not-composition)))
+;;        ;; (setq haskell-font-lock-keywords (haskell-font-lock-keywords-create nil))
+;;        ))))
 
 ;; (use-package shm
 ;;   :ensure t
@@ -548,4 +534,3 @@
   :config
   (progn
     (setq webpaste-provider-priority '("ptpb.pw" "dpaste.de"))))
->>>>>>> 251870d6e80e0e0fd8010ac4d0b8e0c7c73050dd

@@ -1,6 +1,6 @@
 ;(package-initialize)
 
-(defconst emacs-home    "/effy/config/emacs/")
+(defconst emacs-home    "/home/fernandaguim/config/emacs/")
 (defconst desktop-home  (concat emacs-home "desktops/"))
 (defconst dotemacs-dir  (concat emacs-home "dotemacs/"))
 (defconst dotemacs-file (concat dotemacs-dir "gahag.el"))
